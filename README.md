@@ -117,10 +117,33 @@ streamlit run app.py
 
 ## Data Sources
 
-| Source | Description | Link |
-|---|---|---|
-| BTS On-Time Performance | U.S. DOT flight-level delay records | https://www.transtats.bts.gov |
-| Open-Meteo Historical API | Free daily weather archive (no API key required) | https://open-meteo.com |
+### Open-Meteo
+Free historical weather API — no key required. The notebook calls it automatically.
+
+### BTS On-Time Performance (manual download required)
+The raw flight CSV is not included in this repo due to file size (~178MB). Follow these steps to download it:
+
+1. Go to: https://www.transtats.bts.gov/Tables.asp?QO_VQ=EFD&QO_anzr=Nv4yv0r%FDb0-gvzr%FDcr4s14zn0pr%FDQn6n&QO_fu146_anzr=b0-gvzr
+2. Select **Reporting Carrier On-Time Performance**
+3. Set the time period to **January 2025**
+4. In the variable selection panel, check the following fields:
+
+| Field | Description |
+|---|---|
+| YEAR, QUARTER, MONTH, DAY_OF_MONTH, DAY_OF_WEEK | Date fields |
+| FL_DATE | Flight date |
+| OP_UNIQUE_CARRIER, OP_CARRIER_AIRLINE_ID, OP_CARRIER | Carrier codes |
+| TAIL_NUM, OP_CARRIER_FL_NUM | Flight identifiers |
+| ORIGIN_AIRPORT_ID, ORIGIN, ORIGIN_CITY_NAME, ORIGIN_STATE_ABR | Origin airport |
+| DEST_AIRPORT_ID, DEST, DEST_CITY_NAME, DEST_STATE_ABR | Destination airport |
+| CRS_DEP_TIME, DEP_TIME, DEP_DELAY, DEP_DELAY_NEW, DEP_DEL15 | Departure delay fields |
+| CRS_ARR_TIME, ARR_TIME, ARR_DELAY, ARR_DELAY_NEW, ARR_DEL15 | Arrival delay fields |
+| CANCELLED, CANCELLATION_CODE, DIVERTED | Flight status |
+| CRS_ELAPSED_TIME, ACTUAL_ELAPSED_TIME, AIR_TIME | Flight time |
+| DISTANCE | Distance between airports |
+| CARRIER_DELAY, WEATHER_DELAY, NAS_DELAY, SECURITY_DELAY, LATE_AIRCRAFT_DELAY | Delay cause breakdown |
+
+5. Click **Download** and save the file as `T_ONTIME_REPORTING.csv` in the project root folder
 
 ---
 
